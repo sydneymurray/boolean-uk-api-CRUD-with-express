@@ -1,0 +1,31 @@
+// Installation process
+npm init -y
+npm install node-fetch
+npm install express --save
+npm install nodemon
+npm install morgan
+npm install body-parser
+npm install pg
+npm install dotenv
+npm install faker
+
+// Start the server
+nodemon src/index.js
+
+// JS Code
+const fetch = require("node-fetch")
+const express = require("express")
+const app = express()
+
+app.use() // will always run
+
+
+index.js /books route needs to point to ./resources/books/router.js
+./resources/books/router.js needs to handle requests
+./resources/books/router.js passes requests to the ./controller.js
+./resources/books/controller.js decides what to do.
+./resources/books/controller.js uses ./model.js for CRUD
+./resources/books/model.js executes CRUD calls for the controller
+./resources/books/model.js passes back the database response to the controller
+./resources/books/controller.js responds back to the client
+
