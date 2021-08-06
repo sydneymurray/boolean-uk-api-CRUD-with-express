@@ -1,27 +1,38 @@
-Today's exercise: Create with Express
+Today's exercise: Crud with Express from scratch!
 
-Repo: boolean-uk-api-create-with-express
+Repo: boolean-uk-api-CRUD-with-express
 
 Description
-Build the router and the createOne controller for the Books and Pets database
+Build CRUD in the controllers and practice writing SQL queries to get all kinds of data from the database.
 
 Instructions
-- Use this starter template: https://codesandbox.io/s/1001-express-and-sql-create-fbd7v?file=/src/index.js
-- Replace the PGURL environment variable with the your database URL found:
+- Create an express app from scratch.
+- Remember to include Pg, Dotenv and Morgan as dependecies
+- Create a new Database in ElephatSQL, and grab the URL:
     -- in ElephantSQL
     -- in the details section.
-- Build the router for the Books resource
-- Build the router for the Pets resource
-- Build the createOne controller for the Books resource
-- Build the createOne controller for the Pets resource
+- Build the models for Books and Pets. Use the table structure and mock data from our previous exercise
+- Build the controllers for Books and Pets
 
+Build these routes and controllers for the books resource that work with the following fetch requests:
+    -- Full CRUD base routes
+    -- /books/fiction that returns fiction books
+    -- /books/fiction?topic=a-topic that returns a specific topic of fiction books
+    -- /books/non-fiction that return non-fiction books
+    -- /books/non-fiction?topic=a-topic that returns a specific topic of non-fiction books
+    -- /books/author/name-of-author?order=recent that returns a specific authors' books ordered by publicationDate with the most recent first (use ORDER in your SQL query)
+
+Build these routes and controllers for the pets resource that work with the following fetch requests:
+    -- -- Full CRUD base routes
+    -- /pets/types that returns a list of pet types in the database
+    -- /pets/a-pet-type that returns pets of a specific type ie. dog
+    -- /pets/a-pet-type?breed=a-dog-breed that returns pets of a specific type and breed
+    -- /pets?microchip=false that returns all pets without a microchip
+    -- /pets/a-pet-type?microchip=false that returns pets of a specific type without a microchip
+@here
 Tips
-- Take a look inside the model to see what data types you are working with.
-- Use ElephantSQL to check if your requests are succesfully creating rows in the database (there will be mockData stored in there already).
+- Use ElephantSQL to test your SQL queries and see if they are returning what you want before adding them to the code.
+- Practice SQL... do as much of the sorting and filtering using SQL queries rather than Javascript.
 
 Challenge 1
-- Add validation in your controller that sends a useful message back to the client when there's an error, with suggestions as to what they could do differently.
-
-Challenge 2
-- Have a look inside utils/mockData.js and see if you can generate some mock data and build your own resource and model ie. a bank account resource or a vehicle tax resource. Take a look at faker.js for inspiration.
-
+Add validations in your controllers that sends a useful message back to the client when there's an error, with suggestions as to what they could do differently.

@@ -2,18 +2,13 @@ const express = require("express")
 const booksController = require("./controller")
 
 const booksRouter = express.Router()
-//const Book = require("./model")
 
-booksRouter.get("/", (req, resp) => {
-    resp.json({OK: true})
-    }
-)
+booksRouter.get("/", booksController.retrieveAll)
 
 booksRouter.post("/", booksController.createOne)
 
-booksRouter.patch("/:id", (req, resp) => {
+booksRouter.patch("/:id", booksController.updateOne)
 
-    }
-)
+booksRouter.delete("/:id", booksController.deleteOne)
 
 module.exports = booksRouter

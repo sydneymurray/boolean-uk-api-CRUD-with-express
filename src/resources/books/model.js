@@ -47,9 +47,39 @@ function Book() {
       .then(dbResponse => callbackFunction(dbResponse.rows[0]))
   }
 
+  function updateOneBook(book, bookId, callbackFunction){
+    let {title, type, author, topic, publicationDate} = book
+    let sql = `
+      UPDATE books
+      SET title = $1, type = $2, author = $3, topic = $4, publicationDate = $5
+      WHERE id = $6
+      RETURNING *;
+    `
+    db.query(sql, [title, type, author, topic, publicationDate, Number(bookId)])
+      .then(dbResponse => callbackFunction(dbResponse.rows[0]))
+  }
+
+  function deleteOneBook(bookId, callbackFunction){
+    let sql = `
+      DELETE FROM books WHERE id = $1
+      RETURNING *;
+    `
+    db.query(sql, [Number(bookId)])
+      .then(dbResponse => callbackFunction(dbResponse.rows[0]))
+  }
+
+  function retrieveAllBooks(callbackFunction){
+    let sql = `
+      SELECT * FROM books;
+    `
+    db.query(sql)
+      .then(dbResponse => callbackFunction(dbResponse.rows))
+      .catch(error => console.log(error))
+  }
+
   createTable();
   mockData();
-  return {createOneBook}
+  return {createOneBook, updateOneBook, deleteOneBook, retrieveAllBooks}
 }
 
 module.exports = Book;
