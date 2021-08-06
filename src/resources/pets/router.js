@@ -2,18 +2,13 @@ const express = require("express")
 const petsController = require("./controller")
 
 const petsRouter = express.Router()
-//const Book = require("./model")
 
-petsRouter.get("/", (req, resp) => {
-    resp.json({OK: true})
-    }
-)
+petsRouter.get("/", petsController.retrieveAll)
 
 petsRouter.post("/", petsController.createOne)
 
-petsRouter.patch("/:id", (req, resp) => {
+petsRouter.patch("/:id", petsController.updateOne)
 
-    }
-)
+petsRouter.delete("/:id", petsController.deleteOne)
 
 module.exports = petsRouter

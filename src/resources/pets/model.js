@@ -46,9 +46,39 @@ function Pet() {
     return dbResponse.rows[0]
   } 
 
+  function updateOnePet(pet, petId, callbackFunction){
+    let {name, age, type, breed, microchip} = pet
+    let sql = `
+      UPDATE pets
+      SET name = $1, age = $2, type = $3, breed = $4, microchip = $5
+      WHERE id = $6
+      RETURNING *;
+    `
+    db.query(sql, [name, age, type, breed, microchip, Number(petId)])
+      .then(dbResponse => callbackFunction(dbResponse.rows[0]))
+  }
+
+  function deleteOnePet(petId, callbackFunction){
+    let sql = `
+      DELETE FROM pets WHERE id = $1
+      RETURNING *;
+    `
+    db.query(sql, [Number(petId)])
+      .then(dbResponse => callbackFunction(dbResponse.rows[0]))
+  }
+
+  function retrieveAllPets(callbackFunction){
+    let sql = `
+      SELECT * FROM pets;
+    `
+    db.query(sql)
+      .then(dbResponse => callbackFunction(dbResponse.rows))
+      .catch(error => console.log(error))
+  }
+
   createTable();
   mockData();
-  return {createOnePet}
+  return {createOnePet, updateOnePet, deleteOnePet, retrieveAllPets}
 }
 
 module.exports = Pet;

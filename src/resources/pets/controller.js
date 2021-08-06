@@ -2,7 +2,7 @@
 const { response } = require("express");
 const db = require("../../utils/database");
 const Pet = require("./model")
-const {createOnePet} = Pet()
+const {createOnePet, updateOnePet, deleteOnePet, retrieveAllPets} = Pet()
 
 
 function createOne(req, res){
@@ -10,4 +10,17 @@ function createOne(req, res){
     .then(newPet => res.json({newPet}))
 }
 
-module.exports = {createOne}
+function updateOne(req, res){
+  updateOnePet(req.body, req.params.id, pet => res.json({pet}))
+}
+
+function deleteOne(req, res){
+  deleteOnePet(req.params.id, pet => res.json({pet}))
+}
+
+function retrieveAll(req, res){
+  retrieveAllPets(pets => res.json({pets}))
+}
+
+
+module.exports = {createOne, deleteOne, updateOne, retrieveAll}
